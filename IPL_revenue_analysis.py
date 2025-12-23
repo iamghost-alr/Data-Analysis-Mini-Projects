@@ -1,6 +1,7 @@
 import pandas as pd
 
 #Dataset
+
 data = {
     "match_id": [
         2001,2002,2003,2004,2005,
@@ -74,6 +75,7 @@ print(df.describe())
 df['date'] = pd.to_datetime(df["date"])
 
 #General Metric With Analysis 
+
 df['total_revenue'] = df['tickets_sold'] * df['ticket_price'] + df['sponsorship_revenue'] + df['broadcast_revenue']
 total_revenue = df['total_revenue'].sum()
 total_cost = df['stadium_cost'].sum()
@@ -120,7 +122,8 @@ print("Total revenue lost due to unsold tickets: ", total_revenue_lost_due_to_un
 print("Profit margin for each match: ", (df['profit'] / df['total_revenue']) * 100)
 print("Revenue per seat for each match: ", df['total_revenue'] / df['stadium_capacity'])
 
-#Concatenation 
+#Concatenation
+
 team_profit = pd.concat([
     df[['team_1', 'profit']].rename(columns={'team_1': 'team'}),
     df[['team_2', 'profit']].rename(columns={'team_2': 'team'})
@@ -138,6 +141,7 @@ print("Highets earning team is: ", team_wise_profit.idxmax())
 print("Lowest earning team is: ", team_wise_profit.idxmin())
 
 #Visualization
+
 import plotly.express as px
 
 fig= px.line(daily_revenue.sort_index(), x=daily_revenue.sort_index().index, y=daily_revenue.sort_index().values, title='Daily Revenue Trend')
@@ -156,6 +160,7 @@ fig = px.bar(team_wise_profit, x=team_wise_profit.index, y=team_wise_profit.valu
 fig.show()
 
 # few word analysis
+
 print("Analysis Summary:")
 print("1. Total revenue generated from all matches is substantial, indicating a healthy interest in the league.")
 print("2. Mumbai emerges as the highest revenue-generating city, likely due to its large fan base and stadium capacity.")
@@ -164,10 +169,12 @@ print("4. There is a noticeable revenue loss due to unsold tickets, suggesting p
 print("5. The correlation between tickets sold and profit indicates that higher attendance directly boosts profitability.")
 
 # what should be done to improve the revenue and profit margins in future matches
+
 print("Recommendations for Improvement:")
 print("1. Implement targeted marketing campaigns to boost ticket sales, especially in cities with lower attendance.")
 print("2. Explore dynamic pricing strategies for tickets to maximize revenue based on demand.")
 print("3. Enhance sponsorship deals by showcasing the league's growing popularity and viewership.")
 print("4. Invest in fan engagement activities to build a loyal fan base, leading to higher merchandise and ticket sales.")
 print("5. Analyze match timings and days to schedule games when maximum audience availability is expected.")
+
 
