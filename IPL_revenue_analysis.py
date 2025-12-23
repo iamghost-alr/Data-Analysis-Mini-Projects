@@ -1,5 +1,6 @@
 import pandas as pd
 
+#Dataset
 data = {
     "match_id": [
         2001,2002,2003,2004,2005,
@@ -70,13 +71,11 @@ data = {
 
 df=pd.DataFrame(data)
 print(df.describe())
-
 df['date'] = pd.to_datetime(df["date"])
 
+#General Metric With Analysis 
 df['total_revenue'] = df['tickets_sold'] * df['ticket_price'] + df['sponsorship_revenue'] + df['broadcast_revenue']
 total_revenue = df['total_revenue'].sum()
-print("Total Revenue from all matches: ", total_revenue)
-
 total_cost = df['stadium_cost'].sum()
 print("Total Cost for all matches: ", total_cost)
 
@@ -121,6 +120,7 @@ print("Total revenue lost due to unsold tickets: ", total_revenue_lost_due_to_un
 print("Profit margin for each match: ", (df['profit'] / df['total_revenue']) * 100)
 print("Revenue per seat for each match: ", df['total_revenue'] / df['stadium_capacity'])
 
+#Concatenation 
 team_profit = pd.concat([
     df[['team_1', 'profit']].rename(columns={'team_1': 'team'}),
     df[['team_2', 'profit']].rename(columns={'team_2': 'team'})
@@ -137,6 +137,7 @@ print("Average Profit per Team: ", average_team_profit)
 print("Highets earning team is: ", team_wise_profit.idxmax())
 print("Lowest earning team is: ", team_wise_profit.idxmin())
 
+#Visualization
 import plotly.express as px
 
 fig= px.line(daily_revenue.sort_index(), x=daily_revenue.sort_index().index, y=daily_revenue.sort_index().values, title='Daily Revenue Trend')
@@ -169,3 +170,4 @@ print("2. Explore dynamic pricing strategies for tickets to maximize revenue bas
 print("3. Enhance sponsorship deals by showcasing the league's growing popularity and viewership.")
 print("4. Invest in fan engagement activities to build a loyal fan base, leading to higher merchandise and ticket sales.")
 print("5. Analyze match timings and days to schedule games when maximum audience availability is expected.")
+
